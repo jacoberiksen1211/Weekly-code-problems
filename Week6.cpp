@@ -13,7 +13,18 @@ class Fraction {
         int numerator;
         int denominator;
         void simplify(void){
-
+            int temp = 0;
+            if(this->numerator > this->denominator){
+                temp = this->denominator;
+            }
+            else{
+                temp = this->numerator;
+            }
+            while(temp > 1 && ( this->numerator % temp != 0 || this->denominator % temp != 0 )){
+                temp--;
+            }
+            this->numerator = this->numerator / temp;
+            this->denominator = this->denominator / temp;
         }
     public:
         // Class constructor
@@ -23,7 +34,6 @@ class Fraction {
         }
         // Methods to update the fraction
         void add(Fraction f){
-            cout << "add called" << endl;
 
             //finding least common denominator
             int counterA = 1;
@@ -43,13 +53,18 @@ class Fraction {
             this->numerator = this->numerator * counterA + counterB * f.numerator;
             this->denominator = this->denominator * counterA;
 
+            simplify();
         }
 
         void mult(Fraction f){
-
+            this->numerator = this->numerator * f.numerator;
+            this->denominator = this->denominator * f.denominator;
+            simplify();
         }
         void div(Fraction f){
-
+            this->numerator = this->numerator * f.denominator;
+            this->denominator = this->denominator * f.numerator;
+            simplify();
         }
         // Display method
         void display(void){
@@ -59,10 +74,44 @@ class Fraction {
 
 int main(int argc, char const *argv[])
 {
-    Fraction a(1, 6);
-    Fraction b(1, 8);
-    a.add(b);
-    a.display();
+    int n1, d1, n2, d2;
+    char slash = ' ';
+    string op = "";
+    while(true){
+        //while there is more input
+        cin >> n1;
+        if(cin.fail()) break;
+        cin >> slash;
+        if(cin.fail()) break;
+        cin >> d1;
+        if(cin.fail()) break;
+        cin >> op;
+        if(cin.fail()) break;
+        cin >> n2;
+        if(cin.fail()) break;
+        cin >> slash;
+        if(cin.fail()) break;
+        cin >> d2;
+        if(cin.fail()) break;
+        
+        Fraction a(n1, d1);
+        Fraction b(n2, d2);
+        
+        if(op.compare("*") == 0){
+            a.mult(b);
+            a.display();
+        }
+        else if(op.compare("div") == 0){
+            a.div(b);
+            a.display();
+        }
+        else if(op.compare("+") == 0){
+            a.add(b);
+            a.display();
+        }
+       
+
+    }
     return 0;
 }
 
