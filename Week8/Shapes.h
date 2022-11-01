@@ -7,12 +7,12 @@ class Shape
 {
 private:
 public:
-    ~Shape();
-    virtual double area();
-    virtual double perimiter();
-    virtual double height();
-    virtual double width();
-    virtual void rotate();
+    
+    virtual double area() = 0;
+    virtual double perimeter() = 0;
+    virtual double height() = 0;
+    virtual double width() = 0;
+    virtual void rotate() = 0;
 };
 
 
@@ -24,7 +24,6 @@ private:
 public:
     double y;
     double x;
-    Rectangle();
     Rectangle(double, double);
     double area();
     double perimeter();

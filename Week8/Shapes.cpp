@@ -1,4 +1,4 @@
-#include "Shapes.h"
+#include "shapes.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -6,12 +6,9 @@
 using namespace std;
 
 //rectangle
-Rectangle::Rectangle(){
-    //huhuhu
-};
-Rectangle::Rectangle(double x, double y){
-    this->x = x;
-    this->y = y;
+Rectangle::Rectangle(double height, double width){
+    this->x = width;
+    this->y = height;
 }
 double Rectangle::height(){
     return this->y;
@@ -31,10 +28,17 @@ void Rectangle::rotate(){
     this->y = tempx; 
 }
 
+Rectangle::~Rectangle(){
 
-Square::Square(double x) : Rectangle(){
-    this->x = x;
-    this->y = y;
+}
+
+
+Square::Square(double x) : Rectangle(x, x){
+    
+}
+
+Square::~Square(){
+
 }
 
 //Circle implementation
@@ -49,11 +53,14 @@ double Circle::area(){
 }
 
 double Circle::height(){
-    return this->radius;
+    return this->radius*2;
 }
 double Circle::width(){
-    return this->radius;
+    return this->radius*2;
 }
 double Circle::perimeter(){
     return this->radius*2 * M_PI;
+}
+Circle::~Circle(){
+
 }
